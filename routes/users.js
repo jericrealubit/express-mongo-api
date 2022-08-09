@@ -16,7 +16,7 @@ router.get("/", (req, res) => {
 //     res.send("User New Form")
 // })
 
-// add document
+// add a document
 router.post("/", (req, res) => {
     collection.insertOne(req.body, (err, res) => {
         if (err) throw err;  
@@ -27,7 +27,11 @@ router.post("/", (req, res) => {
 router
     .route("/:id")
     .get((req, res) => {    
-        res.send(`Get User with ID ${req.params.id}`)
+        //res.send(`Get User with ID ${req.params.id}`)
+        collection.findOne({_id: req.params.id}, (err, result) => {
+            if (err) throw err;
+            res.send(result)
+        });       
     })
     .put((req, res) => {    
         res.send(`Update User with ID ${req.params.id}`)
