@@ -5,7 +5,8 @@ const { collection, ObjectId } = require("../config/database")
 // get all documents
 router.get("/", (req, res) => {
     //res.send("User List")
-    collection.find().toArray((err, result) => {
+    // collection.find().toArray((err, result) => {
+    collection.find({}, { projection: { _id: 0 } }).toArray((err, result) => {
         if (err) throw err;
         res.json(result);
     });
